@@ -77,6 +77,5 @@ function run_anony_wc_checkout_uploads() {
 
 	$plugin = new Anony_Wc_Checkout_Uploads();
 	$plugin->run();
-
 }
 run_anony_wc_checkout_uploads();

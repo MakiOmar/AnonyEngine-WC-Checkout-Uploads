@@ -30,7 +30,5 @@ class Anony_Wc_Checkout_Uploads_Activator {
 	 * @since    1.0.0
 	 */
 	public static function activate() {
-
 	}
-
 }
