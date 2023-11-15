@@ -1,6 +1,6 @@
  {
  	"name" : "AnonyEngine WC Checkout Uploads",
- 	"version" : "1.0.1",
+ 	"version" : "1.0.11",
  	"download_url" : "https://github.com/MakiOmar/AnonyEngine-WC-Checkout-Uploads/archive/refs/heads/master.zip",
  	"sections" : {
  		"description" : "Add upload inputs to WooCommerce checkout form."

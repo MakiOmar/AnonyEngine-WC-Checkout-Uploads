@@ -15,7 +15,7 @@
  * Plugin Name:       AnonyEngine WC Checkout Uploads
  * Plugin URI:        https://makiomar.com
  * Description:       Add upload inputs to WooCommerce checkout form.
- * Version:           1.0.01
+ * Version:           1.0.011
  * Author:            Mohammad Omar
  * Author URI:        https://https://github.com/MakiOmar/
  * License:           GPL-2.0+
@@ -79,6 +79,15 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-anony-wc-checkout-uploads.
  * @const
  */
 define( 'ANCUP_PLUGIN_SLUG', plugin_basename( __FILE__ ) );
+
+/**
+ * Holds plugin PATH
+ *
+ * @const
+ */
+define( 'ANCUP_DIR', wp_normalize_path( plugin_dir_path( __FILE__ ) ) );
+
+require ANCUP_DIR . 'plugin-update-checker/plugin-update-checker.php';
 
 $anonyengine_checkout_uploads = Puc_v4_Factory::buildUpdateChecker(
 	'https://github.com/MakiOmar/AnonyEngine-WC-Checkout-Uploads',
