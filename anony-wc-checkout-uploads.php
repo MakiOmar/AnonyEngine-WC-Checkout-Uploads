@@ -15,7 +15,7 @@
  * Plugin Name:       AnonyEngine WC Checkout Uploads
  * Plugin URI:        https://makiomar.com
  * Description:       Add upload inputs to WooCommerce checkout form.
- * Version:           1.0.0
+ * Version:           1.0.01
  * Author:            Mohammad Omar
  * Author URI:        https://https://github.com/MakiOmar/
  * License:           GPL-2.0+
