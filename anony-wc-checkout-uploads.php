@@ -72,15 +72,15 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-anony-wc-checkout-uploads.
  *
  * @since    1.0.0
  */
- 
+
 /**
  * Holds plugin's slug
  *
  * @const
  */
 define( 'ANCUP_PLUGIN_SLUG', plugin_basename( __FILE__ ) );
- 
- $anonyengine_checkout_uploads = Puc_v4_Factory::buildUpdateChecker(
+
+$anonyengine_checkout_uploads = Puc_v4_Factory::buildUpdateChecker(
 	'https://github.com/MakiOmar/AnonyEngine-WC-Checkout-Uploads',
 	__FILE__,
 	ANCUP_PLUGIN_SLUG
