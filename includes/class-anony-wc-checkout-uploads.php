@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The file that defines the core plugin class
  *
@@ -153,6 +152,13 @@ class Anony_Wc_Checkout_Uploads {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		$this->loader->add_action( 'admin_notices', $plugin_admin, 'admin_notices' );
+
+		if ( ! in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ), true ) ) {
+			return;
+		}
+
+		$this->loader->add_action( 'woocommerce_admin_order_data_after_billing_address', $plugin_admin, 'display_uploaded_file_in_admin_orders' );
 	}
 
 	/**
@@ -164,10 +170,22 @@ class Anony_Wc_Checkout_Uploads {
 	 */
 	private function define_public_hooks() {
 
+		if ( ! in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ), true ) ) {
+			return;
+		}
+
 		$plugin_public = new Anony_Wc_Checkout_Uploads_Public( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		$this->loader->add_action( 'woocommerce_checkout_before_customer_details', $plugin_public, 'add_custom_checkout_field' );
+		// Required upload field validation.
+		$this->loader->add_action( 'woocommerce_checkout_process', $plugin_public, 'checkout_required_upload_validation' );
+		$this->loader->add_action( 'wp_ajax_checkout_upload', $plugin_public, 'checkout_ajax_file_upload' );
+		$this->loader->add_action( 'wp_ajax_nopriv_checkout_upload', $plugin_public, 'checkout_ajax_file_upload' );
+		$this->loader->add_action( 'woocommerce_checkout_create_order', $plugin_public, 'save_checkout_uploaded_file', 10, 2 );
+
+		$this->loader->add_filter( 'woocommerce_form_field', $plugin_public, 'woocommerce_form_input_field_type_file', 10, 3 );
 	}
 
 	/**

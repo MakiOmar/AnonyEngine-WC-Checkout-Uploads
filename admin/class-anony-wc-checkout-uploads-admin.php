@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The admin-specific functionality of the plugin.
  *
@@ -95,5 +94,49 @@ class Anony_Wc_Checkout_Uploads_Admin {
 		 */
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/anony-wc-checkout-uploads-admin.js', array( 'jquery' ), $this->version, false );
+	}
+
+	/**
+	 * Admin notices
+	 */
+	public function admin_notices() {
+		// Make sure that WooCommerce plugin is active.
+		if ( ! in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ), true ) ) {
+			?>
+			<div class="notice notice-success is-dismissible">
+				<p><?php esc_html_e( 'Plugin AnonyEngine WC Checkout Uploads requires WooCommerce plugin activated.' ); ?></p>
+			</div>
+			<?php
+		}
+	}
+
+	/**
+	 * Render order upload.
+	 *
+	 * @param string $meta_key Meta key.
+	 * @param object $order Order object.
+	 * @return void
+	 */
+	protected function render_order_upload( $meta_key, $order ) {
+		$meta_value = $order->get_meta( $meta_key );
+		if ( $meta_value ) {
+			printf(
+				'<p>%s <br><a href="%s">%s</a></p>',
+				esc_html( $meta_value['data_label'] ),
+				esc_url( $meta_value['file_url'] ),
+				esc_html( $meta_value['file_name'] )
+			);
+		}
+	}
+
+	/**
+	 * Display uploads in order
+	 *
+	 * @param object $order Order.
+	 * @return void
+	 */
+	public function display_uploaded_file_in_admin_orders( $order ) {
+		$this->render_order_upload( '_national_id_front', $order );
+		$this->render_order_upload( '_national_id_back', $order );
 	}
 }
