@@ -42,3 +42,10 @@ body.rtl .anony-checkout-upload-label .anony-upload-response-icon{
 .anony-failure-icon{
 	color: red;
 }
+.anony-upload-lable-text{
+	padding: 0 5px;
+    margin: 0 10px;
+	max-width: 220px;
+    overflow: hidden;
+	display: inline-flex;
+}
